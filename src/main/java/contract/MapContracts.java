@@ -1,4 +1,4 @@
-package contract.util;
+package contract;
 
 import ch.usi.si.codelounge.jsicko.Contract;
 
@@ -10,10 +10,12 @@ import static ch.usi.si.codelounge.jsicko.Contract.old;
 
 public interface MapContracts<K,V> extends Map<K,V>, Contract {
 
+    /*
     @Invariant
     default public boolean size_non_negative(){
         return size() >= 0 ;
     }
+     */
 
     // size method
     @Pure
@@ -65,14 +67,10 @@ public interface MapContracts<K,V> extends Map<K,V>, Contract {
     default boolean returns_nonzero_size(){
         return !isEmpty();
     }
-    
+
     @Pure
-    default boolean returns_bigger_size_iff_different(K key){
-        if(containsKey(key)) {
-            return size() == old(this).size();
-        } else {
-            return size() > old(this).size()+1;
-        }
+    default boolean returns_bigger_size_iff_different(){
+        return size() >= old(this).size();
     }
 
     //putIfAbsent

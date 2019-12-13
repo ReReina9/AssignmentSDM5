@@ -1,19 +1,20 @@
-package contract.util;
+package contract;
 
-import org.junit.Test;
+import contract.HashMapContracts;
+import contract.MapContracts;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
 import static junit.framework.TestCase.assertEquals;
 
-
-public class HashMapContractTest {
+public class HashMapContractsTest {
 
     @Test
-    public void testSize() {
+    void testSize() {
         MapContracts<Integer, String> mc = new HashMapContracts<>();
         assertEquals(mc.size(), 0);
-        mc.put(null,null);
+        mc.put(null, null);
         assertEquals(mc.size(), 1);
     }
 
@@ -66,7 +67,7 @@ public class HashMapContractTest {
         mc.remove(1);
         assertEquals(mc.containsKey(1), false);
         assertEquals(mc.containsKey(2), true);
-        assertEquals(mc.size(),1);
+        assertEquals(mc.size(), 1);
     }
 
     @Test
@@ -77,7 +78,7 @@ public class HashMapContractTest {
         mc.clear();
         assertEquals(mc.containsKey(1), false);
         assertEquals(mc.containsKey(2), false);
-        assertEquals(mc.size(),0);
+        assertEquals(mc.size(), 0);
     }
 
     @Test
@@ -85,7 +86,9 @@ public class HashMapContractTest {
         MapContracts<Integer, String> mc = new HashMapContracts<>();
         mc.put(1, "prova");
         mc.put(2, "hey");
-        mc.replaceAll((k,v) -> {return v = v + "replace";});
+        mc.replaceAll((k, v) -> {
+            return v = v + "replace";
+        });
         assertEquals(mc.containsValue("prova"), false);
         assertEquals(mc.containsValue("provareplace"), true);
         assertEquals(mc.containsValue("hey"), false);
@@ -93,6 +96,7 @@ public class HashMapContractTest {
         assertEquals(mc.size(), 2);
     }
 
+    @Test
     public void testKeySet() {
         MapContracts<Integer, String> mc = new HashMapContracts<>();
         mc.put(1, "prova");
@@ -102,4 +106,5 @@ public class HashMapContractTest {
         assertEquals(keyset.contains(2), true);
         assertEquals(keyset.size(), 2);
     }
+
 }

@@ -1,4 +1,4 @@
-package contract.util;
+package contract;
 
 import java.util.HashMap;
 import java.util.Set;
