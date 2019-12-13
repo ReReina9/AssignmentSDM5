@@ -8,13 +8,12 @@ import java.util.function.BiFunction;
 
 import static ch.usi.si.codelounge.jsicko.Contract.old;
 
-public interface Contracts<K,V> extends Map<K,V>, Contract {
+public interface MapContracts<K,V> extends Map<K,V>, Contract {
 
     @Invariant
     default public boolean size_non_negative(){
         return size() >= 0 ;
     }
-
 
     // size method
     @Pure
@@ -23,10 +22,10 @@ public interface Contracts<K,V> extends Map<K,V>, Contract {
 
 
     @Pure
-    //c 0 <= result;
     default boolean returns_nonnegative(int returns) {
         return 0 <= returns;
     }
+
 
     // isEmpty method
     @Pure
@@ -42,21 +41,21 @@ public interface Contracts<K,V> extends Map<K,V>, Contract {
 
     // containsKey method
     @Pure
-    @Requires("size_non_empty")
-    //@Ensures({"returns_iff_exists", "when_exception_null"})
+    @Ensures("size_non_empty")
     boolean containsKey(Object o);
 
     @Pure
-    //c result == (exist (E e: this) e.equals(o));
-    default boolean size_non_empty(boolean returns) {
-        return returns == isEmpty();
+    default boolean size_non_empty(Object o, boolean returns) {
+        if(isEmpty()){
+            return returns == false;
+        } else
+            return true;
     }
 
     // containsValue method
     @Pure
-    @Requires("size_non_empty")
+    @Ensures("size_non_empty")
     boolean containsValue(Object o);
-
 
     // put method
     @Pure
@@ -111,7 +110,7 @@ public interface Contracts<K,V> extends Map<K,V>, Contract {
 
     //replaceAll
     @Pure
-    @Ensures({"returns_same_size"})
+    @Ensures({"returns_same_size","returns_same_keys"})
     void replaceAll(BiFunction<? super K, ? super V, ? extends V> function);
 
     @Pure
@@ -119,26 +118,19 @@ public interface Contracts<K,V> extends Map<K,V>, Contract {
         return size() == old(this).size();
     }
 
-    /*
     @Pure
     default boolean returns_same_keys(){
-        for(int i = 0; i < size(); i++){
-            getKey();
-            if(old(this).containsKey(){
-
-            }
-        }
-        return true;
+        Set<K> oldKeySet = old(this).keySet();
+        Set<K> newKeySet = keySet();
+        return oldKeySet.equals(newKeySet) ? true : false;
     }
-     */
 
-    // keySet method
     @Pure
     @Ensures("returns_same_set_size")
     Set<K> keySet();
 
     @Pure
-    default boolean returns_same_set_size(Set<K> a){
-        return a.size() == size();
+    default boolean returns_same_set_size(Set<K> returns){
+        return returns.size() == size();
     }
 }

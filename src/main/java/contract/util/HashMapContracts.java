@@ -1,13 +1,11 @@
 package contract.util;
 
-import ch.usi.si.codelounge.jsicko.Contract;
-
 import java.util.HashMap;
 import java.util.Set;
 import java.util.function.BiFunction;
 
 
-public class HashMapContracts<K,V> extends HashMap<K,V> implements Contracts<K,V> {
+public class HashMapContracts<K,V> extends HashMap<K,V> implements MapContracts<K,V> {
 
     @Override
     public int size() { return super.size(); }
