@@ -33,9 +33,8 @@ public interface MapContracts<K,V> extends Map<K,V>, Contract {
     boolean isEmpty();
 
     @Pure
-    //c result == (size == 0);
     default boolean returns_iff_size_is_zero(boolean returns) {
-        return returns == (size() == 1);
+        return returns == (size() == 0);
     }
 
 
