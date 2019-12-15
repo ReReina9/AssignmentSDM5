@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ArrayDequeContractsTest {
 
-    /*
+
     @Test
     public void addFirstTest(){
         ArrayDequeContracts<Object> array_deque = new ArrayDequeContracts<>();
         array_deque.addFirst("elem");
         assertThrows(Contract.PostconditionViolation.class, () -> array_deque.addFirst("elem2"));
-    }*/
+    }
 
     /*@Test
     public void addLastTest(){
