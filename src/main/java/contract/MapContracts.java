@@ -1,35 +1,29 @@
 package contract;
 
-import ch.usi.si.codelounge.jsicko.Contract;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
 
+import ch.usi.si.codelounge.jsicko.Contract;
 import static ch.usi.si.codelounge.jsicko.Contract.old;
+import static ch.usi.si.codelounge.jsicko.ContractUtils.*;
 
 public interface MapContracts<K,V> extends Map<K,V>, Contract {
 
-    /*
     @Invariant
     default public boolean size_non_negative(){
         return size() >= 0 ;
     }
-     */
 
-    // size method
     @Pure
-    @Ensures("returns_nonnegative")
+    @Ensures("returns_non_negative")
     int size();
 
-
     @Pure
-    default boolean returns_nonnegative(int returns) {
+    default boolean returns_non_negative(int returns) {
         return 0 <= returns;
     }
 
-
-    // isEmpty method
     @Pure
     @Ensures("returns_iff_size_is_zero")
     boolean isEmpty();
@@ -39,41 +33,28 @@ public interface MapContracts<K,V> extends Map<K,V>, Contract {
         return returns == (size() == 0);
     }
 
-
-    // containsKey method
     @Pure
     @Ensures("size_non_empty")
     boolean containsKey(Object o);
 
     @Pure
-    default boolean size_non_empty(Object o, boolean returns) {
-        if(isEmpty()){
-            return returns == false;
-        } else
-            return true;
-    }
-
-    // containsValue method
-    @Pure
-    @Ensures("size_non_empty")
-    boolean containsValue(Object o);
-
-    // put method
-    @Pure
-    @Ensures({"returns_nonzero_size","returns_bigger_size_iff_different"})
-    V put(K key, V value);
-
-    @Pure
-    default boolean returns_nonzero_size(){
+    default boolean size_non_empty() {
         return !isEmpty();
     }
 
     @Pure
-    default boolean returns_bigger_size_iff_different(){
+    @Ensures("size_non_empty")
+    boolean containsValue(Object o);
+
+    @Pure
+    @Ensures({"size_non_empty","returns_bigger_or_same_size"})
+    V put(K key, V value);
+
+    @Pure
+    default boolean returns_bigger_or_same_size(){
         return size() >= old(this).size();
     }
 
-    //putIfAbsent
     @Pure
     @Ensures("returns_same_size_iff_absent")
     V putIfAbsent(K key, V value);
@@ -86,7 +67,6 @@ public interface MapContracts<K,V> extends Map<K,V>, Contract {
             return size() == old(this).size() + 1;
     }
 
-    // remove method
     @Pure
     @Ensures("returns_smaller_size_iff_exists")
     V remove(Object key);
@@ -100,12 +80,14 @@ public interface MapContracts<K,V> extends Map<K,V>, Contract {
         }
     }
 
-    //clear method
     @Pure
-    @Ensures({"returns_nonzero_size"})
+    @Ensures({"returns_zero_size"})
     void clear();
 
-    //replaceAll
+    default boolean returns_zero_size(){
+        return size() == 0;
+    }
+
     @Pure
     @Ensures({"returns_same_size","returns_same_keys"})
     void replaceAll(BiFunction<? super K, ? super V, ? extends V> function);
