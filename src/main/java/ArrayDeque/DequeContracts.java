@@ -8,7 +8,7 @@ import static ch.usi.si.codelounge.jsicko.Contract.old;
 import static ch.usi.si.codelounge.jsicko.ContractUtils.*;
 
 
-public interface ContractsArrayDeque<E> extends Deque<E>, Contract {
+public interface DequeContracts<E> extends Deque<E>, Contract {
 
     @Invariant
     @Pure

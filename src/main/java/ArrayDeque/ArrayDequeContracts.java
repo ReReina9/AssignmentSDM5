@@ -1,10 +1,8 @@
 package ArrayDeque;
 
 import java.util.ArrayDeque;
-import ArrayDeque.ContractsArrayDeque;
 
-
-public class ArrayDequeContracts <E> extends ArrayDeque<E> implements ContractsArrayDeque <E> {
+public class ArrayDequeContracts <E> extends ArrayDeque<E> implements DequeContracts<E> {
 
     @Override
     public void addFirst(E e){ super.addFirst(e);}

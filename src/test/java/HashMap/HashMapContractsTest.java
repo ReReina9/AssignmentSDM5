@@ -10,7 +10,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testSize() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         assertEquals(mc.size(), 0);
         mc.put(null, null);
         assertEquals(mc.size(), 1);
@@ -18,13 +18,13 @@ public class HashMapContractsTest {
 
     @Test
     public void testIsEmpty() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         assertEquals(mc.isEmpty(), true);
     }
 
     @Test
     public void testContainsKey() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(null, null);
         assertEquals(mc.containsKey(null), true);
         assertEquals(mc.containsKey(1), false);
@@ -32,7 +32,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testContainsValue() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(null, null);
         assertEquals(mc.containsValue(null), true);
         assertEquals(mc.containsValue(1), false);
@@ -40,7 +40,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testPut() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(1, "foo");
         assertEquals(mc.containsKey(1), true);
         assertEquals(mc.containsValue("foo"), true);
@@ -48,7 +48,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testPutIfAbsent() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.putIfAbsent(1, "foo");
         mc.putIfAbsent(1, "foo2");
         assertEquals(mc.containsKey(1), true);
@@ -59,7 +59,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testRemove() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(1, "foo");
         mc.put(2, "foo2");
         mc.remove(1);
@@ -70,7 +70,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testClear() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(1, "foo");
         mc.put(2, "foo2");
         mc.clear();
@@ -81,7 +81,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testReplaceAll() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(1, "foo");
         mc.put(2, "foo2");
         mc.replaceAll((k, v) -> {
@@ -96,7 +96,7 @@ public class HashMapContractsTest {
 
     @Test
     public void testKeySet() {
-        MapContracts<Integer, String> mc = new HashMapContracts<>();
+        MapContracts<Integer, String> mc = new HashMapContracts<Integer, String>();
         mc.put(1, "foo");
         mc.put(2, "foo2");
         Set<Integer> keyset = mc.keySet();
