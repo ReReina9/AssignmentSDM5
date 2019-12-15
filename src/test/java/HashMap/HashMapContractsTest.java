@@ -1,8 +1,5 @@
-package contract;
+package HashMap;
 
-import ch.usi.si.codelounge.jsicko.Contract;
-import contract.HashMapContracts;
-import contract.MapContracts;
 import org.junit.jupiter.api.Test;
 
 import java.util.Set;

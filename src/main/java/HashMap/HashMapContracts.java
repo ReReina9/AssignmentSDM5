@@ -1,6 +1,5 @@
-package contract;
+package HashMap;
 
-import ch.usi.si.codelounge.jsicko.Contract;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.function.BiFunction;

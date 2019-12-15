@@ -1,4 +1,4 @@
-package contract;
+package HashMap;
 
 import java.util.Map;
 import java.util.Set;
@@ -6,7 +6,6 @@ import java.util.function.BiFunction;
 
 import ch.usi.si.codelounge.jsicko.Contract;
 import static ch.usi.si.codelounge.jsicko.Contract.old;
-import static ch.usi.si.codelounge.jsicko.ContractUtils.*;
 
 public interface MapContracts<K,V> extends Map<K,V>, Contract {
 
